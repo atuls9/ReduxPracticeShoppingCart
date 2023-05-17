@@ -7,11 +7,14 @@ const ProductItem = (props) => {
   let title = props.title;
   let price = props.price;
   let description = props.description;
+  let id = props.id;
   const dispatch = useDispatch();
-  const addItem = (title, price, description) => {
+  const addItem = (title, id, price, description) => {
     const item = {
+      id: id,
+      key: id,
       title: title,
-      price: price,
+      price: +price,
       description: description,
       quantity: 1,
     };
@@ -23,11 +26,11 @@ const ProductItem = (props) => {
       <Card>
         <header>
           <h3>{title}</h3>
-          <div className={classes.price}>${price.toFixed(2)}</div>
+          <div className={classes.price}>${price}</div>
         </header>
         <p>{description}</p>
         <div className={classes.actions}>
-          <button onClick={() => addItem(title, price, description)}>
+          <button onClick={() => addItem(title, id, price, description)}>
             Add to Cart
           </button>
         </div>

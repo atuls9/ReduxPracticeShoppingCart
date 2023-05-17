@@ -8,11 +8,12 @@ const CartItem = (props) => {
   let quantity = props.quantity;
   let total = props.total;
   let price = props.price;
+  let id = props.id;
 
   const addItem = () => {
     const item = {
       title: title,
-      price: price,
+      price: +price,
       quantity: 1,
     };
     dispatch(cartActions.addItems(item));
@@ -22,12 +23,12 @@ const CartItem = (props) => {
   };
 
   return (
-    <li className={classes.item}>
+    <li className={classes.item} key={id}>
       <header>
         <h3>{title}</h3>
         <div className={classes.price}>
           ${total.toFixed(2)}{" "}
-          <span className={classes.itemprice}>(${price.toFixed(2)}/item)</span>
+          <span className={classes.itemprice}>{price}/item</span>
         </div>
       </header>
       <div className={classes.details}>
@@ -35,7 +36,7 @@ const CartItem = (props) => {
           x <span>{quantity}</span>
         </div>
         <div className={classes.actions}>
-          <button onClick={() => removeItem(title)}> -</button>
+          <button onClick={() => removeItem(id)}> -</button>
           <button onClick={() => addItem(title, price)}>+</button>
         </div>
       </div>

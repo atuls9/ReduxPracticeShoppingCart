@@ -34,21 +34,25 @@ const cartSlice = createSlice({
 
     removeItem(state, action) {
       const existingItemIndex = state.items.findIndex(
-        (el) => el.title === action.payload
+        (el) => el.id === action.payload
       );
       const existingItem = state.items[existingItemIndex];
+      if (existingItem.quantity === 1) {
+        state.items = state.items.filter((el) => +el.id !== +action.payload);
+        console.log("items 1", state.items);
+      }
       console.log(existingItem);
       let updatedItems;
-      if (existingItem) {
+      if (existingItem && existingItem.quantity > 1) {
         const updatedItem = {
           ...existingItem,
           quantity: +existingItem.quantity - 1,
         };
         updatedItems = [...state.items];
         updatedItems[existingItemIndex] = updatedItem;
+
+        state.items = updatedItems;
       }
-      state.items = updatedItems;
-      console.log("remove", state.items);
     },
   },
 });
