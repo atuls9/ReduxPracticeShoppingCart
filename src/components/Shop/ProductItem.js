@@ -9,7 +9,7 @@ const ProductItem = (props) => {
   let description = props.description;
   let id = props.id;
   const dispatch = useDispatch();
-  const addItem = (title, id, price, description) => {
+  const addItem = () => {
     const item = {
       id: id,
       key: id,
@@ -30,9 +30,7 @@ const ProductItem = (props) => {
         </header>
         <p>{description}</p>
         <div className={classes.actions}>
-          <button onClick={() => addItem(title, id, price, description)}>
-            Add to Cart
-          </button>
+          <button onClick={() => addItem()}>Add to Cart</button>
         </div>
       </Card>
     </li>
